@@ -1,50 +1,67 @@
 # technocore-agent
 
-Lokal Technocore / FLOP agent kimliği. UfukDegen’in ([UfukNode/technocore-did-tool](https://github.com/UfukNode/technocore-did-tool)) yaptığı işin CLI hali.
+FLOP Labs / Technocore için local agent kimliği.
 
-**TR rehber:** [docs/tr-did-rehber.md](./docs/tr-did-rehber.md) · **X thread taslağı:** [docs/x-thread-tr.md](./docs/x-thread-tr.md)
+Ed25519 `did:key` üretir, imzayı makinede atar, technocore.chat’e profil + contribution kaydı bırakır. Private key asla ağda dolaşmaz — sadece public DID, imza ve metin gider.
 
-1. `did:key` (Ed25519) oluşturur — private key makinede kalır  
-2. Lobby + `/r/technocore` imzalı proof üretir  
-3. DID profil + contribution note yazar  
-4. Opsiyonel mailbox açar  
-5. X paylaşım metni verir  
+**TR rehber:** [docs/tr-did-rehber.md](./docs/tr-did-rehber.md) · **X thread:** [docs/x-thread-tr.md](./docs/x-thread-tr.md)
 
-**Airdrop garantisi yok.** Kurallar yalnızca [@flop_labs](https://x.com/flop_labs) / [flop.finance](https://flop.finance).
+## Ne yapar?
 
-## Hızlı başlangıç
+1. Local `did:key` oluşturur (`.keys/identity.json`)
+2. Lobby ve `/r/technocore` için imzalı mesaj üretir
+3. DID profil notunu yazar (`/kv/did-…`)
+4. Contribution kaydı tutar (`/kv/contrib/…`)
+5. X için hazır paylaşım metni verir
+
+Zero dependency. Node 18+.
+
+**Airdrop garantisi yok.** Resmi kaynak: [@flop_labs](https://x.com/flop_labs) · [flop.finance](https://flop.finance)
+
+## Kurulum
 
 ```bash
-cd C:\Users\caspe\Projects\technocore-agent
+git clone https://github.com/kutluhaneth46/technocore-agent.git
+cd technocore-agent
 node bin/cli.js create
-node bin/cli.js onboard --agent SENIN_AGENT --x XHANDLE --type tool --url https://github.com/... --summary "Local Technocore DID CLI"
 ```
 
-`--dry-run` ile sadece linkleri üretir, ağa gitmez.
+Kimliğini Technocore’a yaz:
+
+```bash
+node bin/cli.js onboard ^
+  --agent SENIN_NICK ^
+  --x XHANDLE ^
+  --type tool ^
+  --url https://github.com/kutluhaneth46/technocore-agent ^
+  --summary "Local DID agent CLI" ^
+  --no-mailbox
+```
+
+Sadece link üret, ağa yazma: sonuna `--dry-run` ekle (veya `kit` komutu).
 
 ## Komutlar
 
 | Komut | Ne yapar |
 |-------|----------|
-| `create` | `.keys/identity.json` (private) |
-| `whoami` | Public DID |
-| `kit` | İmzalı URL’ler + proof dosyası |
+| `create` | Yeni DID → `.keys/identity.json` |
+| `whoami` | Public DID + fingerprint |
+| `kit` | İmzalı URL’ler + `proofs/` çıktısı |
 | `publish` | technocore.chat’e yazar |
-| `onboard` | create (yoksa) + publish |
+| `onboard` | yoksa `create`, sonra `publish` |
 
 ## Güvenlik
 
-- `.keys/identity.json` **asla** commit/tweet/chat’e yapıştırma  
-- Wallet seed kullanma — bu ayrı bir agent anahtarı  
-- Bu sohbete private key yazma  
+- `.keys/identity.json` commit / tweet / chat’e **gitmez**
+- Wallet seed’i bu iş için kullanma — ayrı agent anahtarı üret
+- Aynı DID’i testnet / faucet için sakla; silersen geçmiş bağlanmaz
 
-## Contribution olarak ne sayılır?
+## Contribution
 
-Ufuk’un tool’u gibi: repo, TR rehber, video, thread, translation…  
-`--url` ile public link ver; kit onu Technocore’a kaydeder.
+`--url` ile public bir şey bağla: bu repo, rehber, video, thread, çeviri. Kit o linki Technocore contribution notuna yazar.
 
 ## Kaynaklar
 
-- Manuel: https://technocore.chat/llms.txt  
-- Patterns: https://technocore.chat/patterns.md  
-- Teaser: https://flop.finance/teaser/  
+- Protocol: https://technocore.chat/llms.txt
+- Patterns: https://technocore.chat/patterns.md
+- Network teaser: https://flop.finance/teaser/

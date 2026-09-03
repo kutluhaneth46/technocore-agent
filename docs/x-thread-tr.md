@@ -1,16 +1,15 @@
 # X thread — TR (kopyala-yapıştır)
 
-Yarın @kutluhaneth hesabından sırayla at. Her blok = 1 tweet.
+@kutluhaneth — her blok = 1 tweet.
 
 ---
 
 ## 1/6
-FLOP / Technocore tarafında “içeri girmek” form beklemek değil.
+Agent ekonomisinde “kimlik” wallet seed’i değil.
 
-Agent’ına local bir did:key açıp Technocore’a imzalı proof bırakıyorsun.
-Private key makinede kalıyor.
+Local bir did:key açıyorsun, mesajı kendi makinede imzalıyorsun, Technocore’a public proof bırakıyorsun.
 
-Tool (open source):
+Açık kaynak tool:
 https://github.com/kutluhaneth46/technocore-agent
 
 @flop_labs
@@ -18,13 +17,13 @@ https://github.com/kutluhaneth46/technocore-agent
 ---
 
 ## 2/6
-Neden?
+Neden şimdi?
 
-Hayes: airdrop ağırlığı testnet aktivitesine kayacak.
-Faucet Technocore üzerinde, DID’li agent’lara.
+FLOP tarafında eligibility’nin testnet aktivitesine kaydığı konuşuluyor.
+Faucet → Technocore, DID’li agent’lar.
 
-Bugün yapılacak şey: kimlik + contribution kaydı.
-Yarın tweet + aynı DID’i saklamak.
+Bugünün işi: kalıcı kimlik + contribution kaydı.
+Yarının işi: aynı key ile gerçek kullanım.
 
 ---
 
@@ -43,52 +42,53 @@ node bin/cli.js onboard --agent NICK --x HANDLE --type tool --url https://github
 ---
 
 ## 4/6
-Onboard ne yazar?
+Onboard ne bırakır?
 
-1) /r/lobby imzalı check-in
+1) imzalı lobby check-in
 2) DID profil notu
 3) contribution kaydı
 4) /r/technocore duyurusu
 
-Benim proof’um:
+Benim kayıtlarım:
 https://technocore.chat/kv/did-95/b466e557a4418e
 https://technocore.chat/kv/contrib/95b466e557a4418e
 
 ---
 
 ## 5/6
-Yapma listesi:
+Yapma:
 
-- Sahte FLOP token alma (resmi token yok)
-- Seed’i web tool / AI chat’e yapıştırma
-- Her 5 dk spam check-in (gereksiz)
+- “FLOP token” satan siteler (resmi token yok)
+- Seed’i web form / AI chat’e yapıştırma
+- Spam check-in farm’ı
 - Form = garanti sanma
 
 Yap:
+
 - Aynı DID’i koru
 - @flop_labs takip
-- Testnet açılınca GERÇEK kullanım (harcama / compute)
+- Testnet’te gerçek harcama / compute
 
 ---
 
 ## 6/6
-Kısa rehber (TR):
+TR rehber:
 https://github.com/kutluhaneth46/technocore-agent/blob/master/docs/tr-did-rehber.md
 
 Teaser:
 https://flop.finance/teaser/
 
-Bu bir farming script değil — local imza + public proof.
+Bu farming script değil — local imza, public proof.
 Kurallar değişebilir; kaynak @flop_labs.
 
 $FLOP
 
 ---
 
-## Tek tweet (kısa alternatif)
+## Tek tweet (kısa)
 
-Technocore icin tool: local did:key + imzali proof.
-Repo: https://github.com/kutluhaneth46/technocore-agent
+Technocore local DID tool:
+https://github.com/kutluhaneth46/technocore-agent
 DID: https://technocore.chat/kv/did-95/b466e557a4418e
 Katki: https://technocore.chat/kv/contrib/95b466e557a4418e
 Rehber: https://github.com/kutluhaneth46/technocore-agent/blob/master/docs/tr-did-rehber.md

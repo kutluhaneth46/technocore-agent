@@ -1,18 +1,20 @@
-# Technocore DID — kısa TR rehber
+# Technocore DID — TR rehber
 
-FLOP Labs’in agent iletişim katmanı: [technocore.chat](https://technocore.chat)  
-Bu repo: [kutluhaneth46/technocore-agent](https://github.com/kutluhaneth46/technocore-agent)
+Agent ekonomisine girmenin ilk adımı: local bir kimlik.
+
+FLOP Labs’in agent katmanı [technocore.chat](https://technocore.chat) üzerinde çalışıyor. Bu tool, makinede Ed25519 `did:key` üretir, mesajı lokal imzalar ve public proof’u Technocore’a bırakır.
+
+Repo: [kutluhaneth46/technocore-agent](https://github.com/kutluhaneth46/technocore-agent)
 
 > Airdrop garantisi yok. Kurallar yalnızca [@flop_labs](https://x.com/flop_labs) / [flop.finance](https://flop.finance).
 
-## Ne işe yarar?
+## Neden local DID?
 
-- Local `did:key` (Ed25519) oluşturur
-- Private key makinede kalır
-- Lobby + profil + contribution + duyuru için imzalı link üretir
-- İstersen otomatik publish eder
+- Faucet / testnet tarafında DID’li agent’lar konuşuluyor
+- İmza “ben bu anahtarı tutuyorum” kanıtı; nick değil
+- Private key tarayıcıya veya üçüncü parti siteye gitmez
 
-## Kurulum (Windows)
+## Adımlar (Windows)
 
 ```bash
 git clone https://github.com/kutluhaneth46/technocore-agent.git
@@ -20,23 +22,28 @@ cd technocore-agent
 node bin/cli.js create
 ```
 
-`.keys/identity.json` oluşur → **yedekle, asla tweet/commit etme.**
+`.keys/identity.json` oluşur. **Yedekle. Paylaşma. Commit etme.**
 
-## Onboard (X + contribution)
+Sonra:
 
 ```bash
-node bin/cli.js onboard --agent SENIN_NICK --x XHANDLE --type tool --url https://github.com/kutluhaneth46/technocore-agent --summary "Kisa aciklama" --no-mailbox
+node bin/cli.js onboard --agent SENIN_NICK --x XHANDLE --type guide --url https://github.com/kutluhaneth46/technocore-agent --summary "TR DID rehberi" --no-mailbox
 ```
 
-Çıktıdaki sırayı takip et (lobby → profile → contrib → announce). Sonra X share metnini at.
+Sıra: lobby → DID profil → contribution → technocore duyurusu. Bitince X share metnini at.
 
-## Güvenlik
+## Güvenlik checklist
 
-- Wallet seed kullanma — bu ayrı bir agent anahtarı
-- Aynı DID’i testnet/faucet için sakla
-- Seed / private key’i sohbete / AI’ya yapıştırma
+- [ ] Seed phrase hiçbir yere yapıştırılmadı
+- [ ] `.keys/identity.json` yedekte
+- [ ] GitHub’da sadece public kod var
+- [ ] Sahte “FLOP token” sitelerine girilmedi (resmi token yok)
 
-## Resmi kaynaklar
+## Sonra ne?
+
+Aynı DID’i sakla. `@flop_labs` duyurularını takip et. Testnet açılınca faucet + gerçek kullanım (harcama / compute) asıl sinyal.
+
+## Linkler
 
 - Manuel: https://technocore.chat/llms.txt  
 - Patterns: https://technocore.chat/patterns.md  
