@@ -1,0 +1,20 @@
+{
+  "name": "technocore-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local Technocore DID agent: create did:key, signed lobby/technocore proofs, contribution notes, mailbox.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "technocore-agent": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "onboard": "node bin/cli.js onboard",
+    "whoami": "node bin/cli.js whoami",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

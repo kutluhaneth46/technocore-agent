@@ -1,0 +1,9 @@
+node_modules/
+.keys/
+*.pem
+*-private.json
+identity*.json
+.env
+receipts/
+proofs/
+.DS_Store
