@@ -1,6 +1,8 @@
 # technocore-agent
 
-Lokal Technocore / FLOP agent kimliği. UfukDegen’in ([UfukNode/technocore-did-tool](https://github.com/UfukNode/technocore-did-tool)) yaptığı işin CLI hali:
+Lokal Technocore / FLOP agent kimliği. UfukDegen’in ([UfukNode/technocore-did-tool](https://github.com/UfukNode/technocore-did-tool)) yaptığı işin CLI hali.
+
+**TR rehber:** [docs/tr-did-rehber.md](./docs/tr-did-rehber.md) · **X thread taslağı:** [docs/x-thread-tr.md](./docs/x-thread-tr.md)
 
 1. `did:key` (Ed25519) oluşturur — private key makinede kalır  
 2. Lobby + `/r/technocore` imzalı proof üretir  
