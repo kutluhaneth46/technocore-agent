@@ -1,0 +1,17 @@
+# Copy to .github/workflows/technocore-keepalive.yml after granting workflow scope,
+# or paste via GitHub UI: Actions → New workflow.
+name: technocore-keepalive
+on:
+  schedule:
+    - cron: "0 12 * * 0"
+  workflow_dispatch:
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Refresh Technocore notes
+        run: node bin/cli.js keepalive

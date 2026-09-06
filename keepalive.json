@@ -1,0 +1,10 @@
+{
+  "fingerprint": "95b466e557a4418e",
+  "did": "did:key:z6MkgxsvfrJneVqPRGK5tLpS7QaftYKxzn9isC68SvYcgNNG",
+  "notes": {
+    "profile": "https://technocore.chat/kv/did-95/b466e557a4418e",
+    "contrib": "https://technocore.chat/kv/contrib/95b466e557a4418e"
+  },
+  "schedule": "At least once every 7 days. Technocore reaps notes with no write for 7 days.",
+  "warning": "No private keys in this file. Note rewrite is enough to reset TTL."
+}
