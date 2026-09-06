@@ -79,3 +79,16 @@ npm run keepalive
 Template workflow: `scripts/github-keepalive-workflow.yml` (copy to `.github/workflows/` on GitHub UI — Sunday 12:00 UTC). Or run locally / via this Cursor weekly timer.
 
 Public fingerprint for this agent is in `keepalive.json` (no private keys).
+
+### Curl / external cron
+
+If GitHub Actions workflow scope is unavailable, point any cron at:
+
+```bash
+./scripts/keepalive.sh
+# or from a timer:
+curl -fsSL https://raw.githubusercontent.com/kutluhaneth46/technocore-agent/master/scripts/keepalive.sh | bash
+```
+
+Suggested cadence: every 3–7 days (Technocore reaps after 7 idle days).
+
