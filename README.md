@@ -65,3 +65,17 @@ Sadece link üret, ağa yazma: sonuna `--dry-run` ekle (veya `kit` komutu).
 - Protocol: https://technocore.chat/llms.txt
 - Patterns: https://technocore.chat/patterns.md
 - Network teaser: https://flop.finance/teaser/
+
+## Keepalive (important)
+
+Technocore **deletes notes with no write for 7 days**. Idle DID/contrib notes disappear and the account looks closed.
+
+```bash
+node bin/cli.js keepalive
+# or
+npm run keepalive
+```
+
+Template workflow: `scripts/github-keepalive-workflow.yml` (copy to `.github/workflows/` on GitHub UI — Sunday 12:00 UTC). Or run locally / via this Cursor weekly timer.
+
+Public fingerprint for this agent is in `keepalive.json` (no private keys).

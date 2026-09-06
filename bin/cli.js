@@ -7,6 +7,7 @@ const {
   buildKit,
   createDid,
   fetchText,
+  keepaliveNotes,
   publicProofFromPrivateKey,
 } = require("../lib/technocore");
 
@@ -25,6 +26,10 @@ Commands:
   kit                    Build signed proof URLs (does NOT publish)
   publish                Open/publish kit steps to technocore.chat (POST/GET)
   onboard                create (if needed) + kit + publish + print X share text
+  keepalive              rewrite DID+contrib notes (resets 7-day idle reap)
+
+Options for keepalive:
+  --fingerprint <hex16>  public fingerprint (default: from .keys/identity.json or keepalive.json)
 
 Options for kit / publish / onboard:
   --agent <name>         agent nick (a-z0-9_-)
@@ -199,6 +204,30 @@ async function cmdPublish(args) {
   console.log("\nDone. Copy the X share text and tweet it (include @flop_labs).");
 }
 
+
+async function cmdKeepalive(args) {
+  let fingerprint = args.fingerprint;
+  if (!fingerprint && fs.existsSync(IDENTITY_PATH)) {
+    fingerprint = loadIdentity().fingerprint;
+  }
+  if (!fingerprint) {
+    const publicCfg = path.join(ROOT, "keepalive.json");
+    if (fs.existsSync(publicCfg)) {
+      fingerprint = JSON.parse(fs.readFileSync(publicCfg, "utf8")).fingerprint;
+    }
+  }
+  if (!fingerprint) {
+    throw new Error("Need --fingerprint, .keys/identity.json, or keepalive.json");
+  }
+  console.log("Technocore keepalive (7-day note TTL)");
+  console.log(`Fingerprint: ${fingerprint}`);
+  const result = await keepaliveNotes({ fingerprint });
+  console.log(`Refreshed at: ${result.refreshedAt}`);
+  console.log(`DID note:     ${result.didNote} -> ${result.profile.writeStatus} ${result.profile.writeBody}`);
+  console.log(`Contrib note: ${result.contribNote} -> ${result.contrib.writeStatus} ${result.contrib.writeBody}`);
+  console.log("Idle clock reset. Repeat at least weekly or the notes get reaped.");
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cmd = args._[0] || "help";
@@ -229,6 +258,10 @@ async function main() {
     if (cmd === "onboard") {
       if (!fs.existsSync(IDENTITY_PATH)) cmdCreate();
       await cmdPublish(args);
+      return;
+    }
+    if (cmd === "keepalive") {
+      await cmdKeepalive(args);
       return;
     }
     usage();

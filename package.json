@@ -12,7 +12,8 @@
     "start": "node bin/cli.js",
     "onboard": "node bin/cli.js onboard",
     "whoami": "node bin/cli.js whoami",
-    "test": "node --test"
+    "test": "node --test",
+    "keepalive": "node bin/cli.js keepalive"
   },
   "engines": {
     "node": ">=18"
